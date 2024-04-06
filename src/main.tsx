@@ -20,7 +20,6 @@ async function enableMocking() {
   }
 }
 
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -31,17 +30,16 @@ const router = createBrowserRouter([
     element: <TestPage />,
   },
   {
-
     path: '/componenttest',
     element: <ComponentTest />,
-
+  },
+  {
     path: '/main',
     element: <MainPage />,
   },
   {
     path: '/library',
     element: <LibraryPage />,
-
   },
 ]);
 
