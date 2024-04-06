@@ -21,9 +21,7 @@ jobs:
         run: npm install -g yarn
 
       - name: install dependencies
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: yarn install
+        run: yarn
 
       - name: build project
         uses: borales/actions-yarn@v4
