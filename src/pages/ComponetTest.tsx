@@ -17,12 +17,11 @@ function ComponentTest() {
           <FaSearch className="mr-2 " />
           <input type="text" placeholder="책 제목을 입력하세요" className="flex-1 outline-none" />
         </div>
-        <Book />
+        <Book title={'모순'} author={'양귀자'} publisher={'쓰다'} />
         <Button text={'시작하기'} />
         <br />
-        <Modal />
-        <Accordion />
-        <Accordion />
+        <Modal number={1} date={'2024.04.06'} content={'200자 내외 감상평'} />
+        <Accordion text={'유저 글자가 20자 미만임'} number={1} date={'2024.04.06'} />
       </div>
     </div>
   );

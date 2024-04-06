@@ -3,7 +3,13 @@ import { IoIosAddCircle } from 'react-icons/io';
 import { GoStarFill } from 'react-icons/go';
 import { GoStar } from 'react-icons/go';
 
-export default function Book() {
+interface TypeBookProps {
+  title: string;
+  author: string;
+  publisher: string;
+}
+
+export default function Book({ title, author, publisher }: TypeBookProps) {
   return (
     <div className="flex bg-gray p-5 rounded-lg justify-between items-center w-full">
       <div className="flex">
@@ -12,13 +18,13 @@ export default function Book() {
         </div>
         <div>
           <p>
-            제목: <span>모순</span>
+            제목: <span>{title}</span>
           </p>
           <p>
-            저자: <span>양귀자</span>
+            저자: <span>{author}</span>
           </p>
           <p>
-            출판사: <span>어쩌구 출판사</span>
+            출판사: <span>{publisher}</span>
           </p>
         </div>
       </div>
