@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { store } from 'store';
 import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import MainPage from 'pages/MainPage';
 
 async function enableMocking() {
   if (import.meta.env.DEV) {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: '/test',
     element: <TestPage />,
+  },
+  {
+    path: '/main',
+    element: <MainPage />,
   },
 ]);
 

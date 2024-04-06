@@ -32,10 +32,3 @@ export type TypeMyBookSchema = {
   myBookId: number;
   status: TypeMyBookStatus;
 } & TypeBookSchema;
-
-export type TypeMemorySchema = {
-  id: string;
-  memory: string;
-  date: string;
-  density: TypeGrape;
-};
