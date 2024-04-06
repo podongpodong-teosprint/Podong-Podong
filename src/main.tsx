@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { store } from 'store';
 import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ComponentTest from 'pages/ComponetTest';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: '/test',
     element: <TestPage />,
+  },
+  {
+    path: '/componenttest',
+    element: <ComponentTest />,
   },
 ]);
 
