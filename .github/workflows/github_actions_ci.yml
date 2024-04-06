@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push: ["develop"]
+  
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: install dependencies
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: yarn
+      - name: build project
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: yarn build
