@@ -1,15 +1,18 @@
-import React, { useRef, useState } from 'react';
+import { useRef } from 'react';
 
-interface TypeModalProps {
+type TypeModalProps = {
   number: number;
   date: string;
   content: string;
-}
+};
 
 export default function Modal({ number, date, content }: TypeModalProps) {
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDialogElement | null>(null);
+
   const openModal = () => {
-    modalRef.current.showModal();
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
   };
 
   return (

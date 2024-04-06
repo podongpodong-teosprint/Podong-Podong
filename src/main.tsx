@@ -9,9 +9,9 @@ import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import ComponentTest from 'pages/ComponetTest';
-
 import MainPage from 'pages/MainPage';
 import LibraryPage from 'pages/LibraryPage';
+import WrappingFrame from 'components/cores/design/WrappingFrame';
 
 async function enableMocking() {
   if (import.meta.env.DEV) {
@@ -50,7 +50,9 @@ enableMocking().then(() =>
     <React.StrictMode>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <WrappingFrame>
+            <RouterProvider router={router} />
+          </WrappingFrame>
         </QueryClientProvider>
       </Provider>
     </React.StrictMode>
