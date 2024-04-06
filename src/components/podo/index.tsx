@@ -2,6 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import { TypeGrape, TypeGrapeShape } from './types';
 import { grapes, styleByType } from './consts';
 import { TypeMemorySchema } from 'apis/memory';
+import { deepSearch } from 'utils.ts';
 
 export default function Podo({ memories }: { memories: TypeMemorySchema[] }) {
   const handlePodoClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
@@ -34,7 +35,7 @@ export default function Podo({ memories }: { memories: TypeMemorySchema[] }) {
         fill="#14AE5C"
       />
       {grapes.map((grape, i) => {
-        return <circle id={`${i}`} key={i} {...createGrape(grape, 0)} />;
+        return <circle id={`${i}`} key={i} {...createGrape(grape, deepSearch(memories[i], 'density') ?? 0)} />;
       })}
     </svg>
   );
