@@ -8,6 +8,7 @@ import { store } from 'store';
 import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import MainPage from 'pages/MainPage';
+import LibraryPage from 'pages/LibraryPage';
 
 async function enableMocking() {
   if (import.meta.env.DEV) {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: '/main',
     element: <MainPage />,
+  },
+  {
+    path: '/library',
+    element: <LibraryPage />,
   },
 ]);
 
