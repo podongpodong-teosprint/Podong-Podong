@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const client = axios.create({
-  baseURL: `${import.meta.env.VITE_SERVER_URL}/api`,
+  baseURL: `${import.meta.env.VITE_SERVER_URL}`,
   timeout: 100000,
   headers: {
     'x-Requested-With': 'XMLHttpRequest',

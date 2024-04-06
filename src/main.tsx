@@ -8,6 +8,13 @@ import { store } from 'store';
 import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+async function enableMocking() {
+  if (import.meta.env.DEV) {
+    const { worker } = await import('./mocks/index');
+    return worker.start();
+  }
+}
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -21,12 +28,14 @@ const router = createBrowserRouter([
 
 const queryClient = new QueryClient();
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </Provider>
-  </React.StrictMode>
+enableMocking().then(() =>
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </Provider>
+    </React.StrictMode>
+  )
 );

@@ -9,11 +9,10 @@ const queryClient = new QueryClient();
  */
 export const useSampleQuery = () => {
   return useQuery({
-    queryKey: ['sample'],
+    queryKey: ['post'],
     queryFn: async () => {
-      console.log('sample');
-      const reponse = await client.get('/sample');
-      return reponse.data.data;
+      const response = await client.get('/post');
+      return response.data;
     },
   });
 };
@@ -23,16 +22,29 @@ export const useSampleQuery = () => {
  * mutate({ key1:"value1" });
  * @returns
  */
-export const useSampleMutation = () =>
-  useMutation({
+export const useUploadMutation = () => {
+  return useMutation({
     mutationFn: function (params: TypeParams) {
-      return client.post(`/sample`, params);
+      return client.post(`/post`, params);
     },
     onSuccess: function () {
-      queryClient.invalidateQueries({ queryKey: ['sample'] });
+      queryClient.invalidateQueries({ queryKey: ['post'] });
     },
   });
+};
+
+export const useDeleteMutation = () => {
+  return useMutation({
+    mutationFn: function (params: { id: string }) {
+      console.log('params', params);
+      return client.delete(`/post/${params.id}`, { data: params });
+    },
+    onSuccess: function () {
+      queryClient.invalidateQueries({ queryKey: ['post'] });
+    },
+  });
+};
 
 type TypeParams = {
-  key1: string;
+  key: string;
 };
