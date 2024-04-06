@@ -1,31 +1,31 @@
 import { TypeGrape, TypeGrapeShape, TypeGrapeStyle } from './types';
 
 export const styleByType: Record<TypeGrape, TypeGrapeStyle> = {
-  primary: {
+  4: {
     fill: '#645CBB',
     stroke: '#645CBB',
     strokeWidth: '2',
     fillOpacity: '0.9',
   },
-  secondary: {
+  3: {
     fill: '#A084DC',
     stroke: '#A084DC',
     strokeWidth: '2',
     fillOpacity: '0.9',
   },
-  tertiary: {
+  2: {
     fill: '#BFACE2',
     stroke: '#A084DC',
     strokeWidth: '2',
     fillOpacity: '0.9',
   },
-  quaternary: {
+  1: {
     fill: '#EBC7E6',
     stroke: '#BFACE2',
     strokeWidth: '2',
     fillOpacity: '0.9',
   },
-  none: {
+  0: {
     fill: '#E9E9E9',
     stroke: 'black',
     strokeDasharray: '2 2',

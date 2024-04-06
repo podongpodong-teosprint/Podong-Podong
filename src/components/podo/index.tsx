@@ -1,8 +1,8 @@
 import { twMerge } from 'tailwind-merge';
-import { TypeGrape, TypeGrapeShape } from './types';
+import { TypeGrape, TypeGrapeShape, TypeMemorySchema } from './types';
 import { grapes, styleByType } from './consts';
 
-export default function Podo() {
+export default function Podo({ memories }: { memories: TypeMemorySchema[] }) {
   const handlePodoClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     const target = e.target as SVGElement;
     if (target.nodeName === 'circle') {
@@ -11,10 +11,10 @@ export default function Podo() {
   };
 
   const createGrape = (shape: TypeGrapeShape, type: TypeGrape) => {
-    const baseClassName = 'cursor-pointer transition-all';
+    const baseClassName = 'cursor-pointer transition-all scale-90';
     const normalTypeClassName = 'hover:opacity-90';
     const noneTypeClassName = 'hover:fill-[#645cbb]';
-    const className = type === 'none' ? noneTypeClassName : normalTypeClassName;
+    const className = type === 0 ? noneTypeClassName : normalTypeClassName;
     const style = styleByType[type];
     return { ...shape, ...style, className: twMerge(baseClassName, className) };
   };
@@ -33,7 +33,7 @@ export default function Podo() {
         fill="#14AE5C"
       />
       {grapes.map((grape, i) => {
-        return <circle id={`${i}`} key={i} {...createGrape(grape, 'none')} />;
+        return <circle id={`${i}`} key={i} {...createGrape(grape, memories[i].density ?? 0)} />;
       })}
     </svg>
   );
