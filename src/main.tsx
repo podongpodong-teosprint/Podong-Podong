@@ -7,6 +7,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { store } from 'store';
 import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import ComponentTest from 'pages/ComponetTest';
+
 import MainPage from 'pages/MainPage';
 import LibraryPage from 'pages/LibraryPage';
 
@@ -16,6 +19,7 @@ async function enableMocking() {
     return worker.start();
   }
 }
+
 
 const router = createBrowserRouter([
   {
@@ -27,12 +31,17 @@ const router = createBrowserRouter([
     element: <TestPage />,
   },
   {
+
+    path: '/componenttest',
+    element: <ComponentTest />,
+
     path: '/main',
     element: <MainPage />,
   },
   {
     path: '/library',
     element: <LibraryPage />,
+
   },
 ]);
 
