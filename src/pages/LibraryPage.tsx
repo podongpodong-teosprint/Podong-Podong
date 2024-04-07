@@ -1,22 +1,19 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { TypeGrape, TypeGrapeShape } from '../components/podo/types';
 import { grapes, styleByType } from '../components/podo/consts';
-// import { TypeMemorySchema } from 'apis/memory';
+
 import ConfirmModal from '../components/library/ConfirmModal';
 import { FaSearch } from 'react-icons/fa';
-import Book from 'components/cores/design/Book';
+
 import { searchBook } from 'apis/kakao';
+import { TypePodoShcema, usePodoListQuery } from 'apis/podo';
 
 export default function LibraryPage() {
-  const podoList: PodoList[] = [
-    {
-      title: '포도책1',
-    },
-    {
-      title: '포도책2',
-    },
-  ];
+  const { data: podoList, isSuccess } = usePodoListQuery();
+  const podoListData = useMemo(() => {
+    return !isSuccess ? [] : Object.values(podoList);
+  }, [isSuccess, podoList]);
 
   return (
     <>
@@ -30,10 +27,14 @@ export default function LibraryPage() {
         </ul>
       </div>
       <div className="grid grid-cols-3 place-items-center">
-        <Podo />
-        <Podo />
-        <Podo />
-        <Podo />
+        {podoListData?.map((podo: TypePodoShcema) => {
+          return (
+            <div>
+              <Podo />
+              <p>{podo.title}</p>
+            </div>
+          );
+        })}
         <EmptyPodo />
       </div>
     </>
@@ -52,7 +53,7 @@ export function Podo() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" onClick={handlePodoClick}>
       <svg
         onClick={handlePodoClick}
         width="100"
@@ -69,7 +70,6 @@ export function Podo() {
           return <circle id={`${i}`} key={i} {...createGrape(grape, 0)} fill="purple" />;
         })}
       </svg>
-      <div>제목</div>
       <ConfirmModal />
     </div>
   );
@@ -126,11 +126,10 @@ export function EmptyPodo() {
           return <circle id={`${i}`} key={i} {...createGrape(grape, 0)} fill="white" />;
         })}
       </svg>
-      <div>제목</div>
       <ConfirmModal />
       <dialog ref={modalRef} id="my_modal_1" className="p-3 modal">
         <div className="w-full modal-box bg-gray">
-          <div className="flex items-center border-2 border-dashed border-gray bg-white rounded-full px-3 py-1 w-full">
+          <div className="flex items-center w-full px-3 py-1 bg-white border-2 border-dashed rounded-full border-gray">
             <FaSearch className="mr-2 " />
             <input
               type="text"
@@ -145,14 +144,14 @@ export function EmptyPodo() {
             <div>
               {apiBooks.length ? (
                 <div className="my-3 overflow-y-auto h-80">
-                  {apiBooks.map((book) => (
+                  {/* {apiBooks.map((book) => (
                     <Book
                       title={book.title}
                       authors={book.authors}
                       publisher={book.publisher}
                       thumbnail={book.thumbnail}
                     />
-                  ))}
+                  ))} */}
                 </div>
               ) : (
                 <p className="text-center my-3 text-[20px]">책이 없습니다.</p>
@@ -174,7 +173,3 @@ export function EmptyPodo() {
     </div>
   );
 }
-
-type PodoList = {
-  title: string;
-};
