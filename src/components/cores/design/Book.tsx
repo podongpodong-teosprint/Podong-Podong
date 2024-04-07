@@ -11,7 +11,7 @@ interface TypeBookProps {
 
 export default function Book({ title, author, publisher }: TypeBookProps) {
   return (
-    <div className="flex bg-gray p-5 rounded-lg justify-between items-center w-full">
+    <div className="flex bg-white p-5 my-3 rounded-lg justify-between items-center w-full">
       <div className="flex">
         <div className="mr-3">
           <img src="https://image.yes24.com/momo/TopCate249/MidCate003/24823257.jpg" alt="" width={50} height={50} />
