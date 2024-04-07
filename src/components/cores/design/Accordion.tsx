@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-interface TypeAccordionProps {
+type TypeAccordionProps = {
   text: string;
   number: number;
   date: string;
-}
+};
 
 export default function Accordion({ text, number, date }: TypeAccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
