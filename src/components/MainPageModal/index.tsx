@@ -4,15 +4,15 @@ import { TypeModalState } from './types';
 
 interface TypeModalProps {
   state: TypeModalState;
-  handleChange: (type: 'content' | 'density') => (value: string | number) => void;
+  handleChange: (type: 'memory' | 'density') => (value: string | number) => void;
   handleSave: () => void;
   handleCancel: () => void;
 }
 
 const MainPageModal = forwardRef(function ({ state, handleChange, handleSave, handleCancel }: TypeModalProps, ref) {
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (state.content.length < 200) {
-      handleChange('content')(e.target.value);
+    if (state.memory.length < 200) {
+      handleChange('memory')(e.target.value);
     }
   };
 
@@ -24,14 +24,14 @@ const MainPageModal = forwardRef(function ({ state, handleChange, handleSave, ha
     <div>
       <dialog ref={ref as React.RefObject<HTMLDialogElement>} id="my_modal_1" className="modal p-3 h-auto">
         <div className="modal-box bg-gray w-[300px] ">
-          <h3 className="text-sub-title">{state.number}번째 포도알</h3>
+          <h3 className="text-sub-title">{state.memoryId}번째 포도알</h3>
           <textarea
             onChange={handleContentChange}
-            value={state.content}
+            value={state.memory}
             className="rounded-md w-full h-40 p-2 resize-none px-4 py-2"
             placeholder="200자 내로 적어주세요."
           />
-          <div className="text-right text-small">{state.content.length}/200</div>
+          <div className="text-right text-small">{state.memory.length}/200</div>
           <div className="flex flex-col gap-1">
             <label htmlFor="date">날짜</label>
             <input

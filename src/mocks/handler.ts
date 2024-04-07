@@ -42,4 +42,9 @@ export const handlers = [
     const { bookId } = params;
     return HttpResponse.json(Object.fromEntries(memories.entries()));
   }),
+  http.post('/memory', async ({ request }) => {
+    const newPost = (await request.json()) as TypeMemorySchema;
+    memories.set(newPost.memoryId, newPost);
+    return HttpResponse.json(newPost, { status: 201 }); // newly created
+  }),
 ];

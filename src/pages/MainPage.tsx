@@ -1,4 +1,4 @@
-import { TypeMemorySchema, useMemoryQuery } from 'apis/memory';
+import { TypeMemorySchema, useMemoryQuery, useMemoryUploadMutation } from 'apis/memory';
 import Accordion from 'components/MainPageAccordion';
 import MainPageModal from 'components/MainPageModal';
 import { TypeModalState } from 'components/MainPageModal/types';
@@ -15,19 +15,21 @@ type TypeCmpFunc = (a: TypeMemorySchema, b: TypeMemorySchema) => number;
 
 export default function MainPage() {
   const INITIAL_MODAL_STATE = {
-    number: '0',
-    content: '',
-    density: -1,
+    memoryId: '0',
+    memory: '',
+    density: 0,
     date: useToday(),
   };
   const [sortType, setSortType] = useState<TypeSort>('latest');
   const [modalState, setModalState] = useState<TypeModalState>(INITIAL_MODAL_STATE);
-  const { data: memories, isError, isLoading, isSuccess } = useMemoryQuery('1');
+  const { data: memories, isError, isLoading, isSuccess, refetch } = useMemoryQuery('1');
+
+  const { mutate: uploadMemory } = useMemoryUploadMutation();
 
   const cmpFuncByType = useCallback((type: TypeSort): TypeCmpFunc => {
     return function (a: TypeMemorySchema, b: TypeMemorySchema) {
       if (type === 'latest') {
-        return a.memoryId < b.memoryId ? 1 : -1;
+        return Number(a.memoryId) < Number(b.memoryId) ? 1 : -1;
       } else if (type === 'density') {
         return a.density < b.density ? 1 : -1;
       } else {
@@ -44,24 +46,35 @@ export default function MainPage() {
     return memoizedMemories.sort(cmpFuncByType(sortType));
   }, [cmpFuncByType, memoizedMemories, sortType]);
 
-  const handleModalChange = (type: 'content' | 'density') => (value: string | number) => {
+  const modalRef = useRef<{ showModal: () => void; close: () => void }>(null);
+
+  const closeModal = () => {
+    if (modalRef && modalRef.current) {
+      setModalState(INITIAL_MODAL_STATE);
+      modalRef.current.close();
+    }
+  };
+
+  const handleModalChange = (type: 'memory' | 'density') => (value: string | number) => {
     setModalState((prev) => ({ ...prev, [type]: value }));
   };
   const handleSave = () => {
-    console.log('modalState', modalState);
+    uploadMemory(
+      { ...modalState, bookId: '1' },
+      {
+        onSuccess: () => {
+          refetch();
+          closeModal();
+        },
+      }
+    );
   };
-
-  const handleCancel = () => {
-    setModalState(INITIAL_MODAL_STATE);
-  };
-
-  const modalRef = useRef<{ showModal: () => void }>(null);
 
   const openModal = (memoryId: string) => {
     const foundMemory = memoizedMemories.find((memory) => memory.memoryId === memoryId);
     const memory = foundMemory
-      ? { number: memoryId, content: foundMemory?.memory, density: foundMemory?.density, date: foundMemory?.date }
-      : { ...INITIAL_MODAL_STATE, number: memoryId };
+      ? { memoryId: memoryId, memory: foundMemory?.memory, density: foundMemory?.density, date: foundMemory?.date }
+      : { ...INITIAL_MODAL_STATE, memoryId: memoryId };
     setModalState(memory);
     if (modalRef && modalRef.current) {
       modalRef.current.showModal();
@@ -105,7 +118,7 @@ export default function MainPage() {
         state={modalState}
         handleChange={handleModalChange}
         handleSave={handleSave}
-        handleCancel={handleCancel}
+        handleCancel={closeModal}
       />
     </div>
   );

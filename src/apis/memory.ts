@@ -1,6 +1,5 @@
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { client } from 'apis';
-import { TypeGrape } from 'components/podo/types';
 
 const queryClient = new QueryClient();
 
@@ -9,7 +8,7 @@ export type TypeMemorySchema = {
   bookId: string;
   memory: string;
   date: string;
-  density: TypeGrape;
+  density: number;
 };
 
 export const useMemoryQuery = (bookId: string) => {

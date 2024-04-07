@@ -1,6 +1,6 @@
 export type TypeModalState = {
-  number: string;
+  memoryId: string;
   date: string;
-  content: string;
+  memory: string;
   density: number;
 };
