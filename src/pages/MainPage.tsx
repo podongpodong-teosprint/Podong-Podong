@@ -141,7 +141,13 @@ export default function MainPage() {
             />
           ))}
       </div>
-      <Button text="다읽었어요" onClick={() => alert('다읽어어요')} />
+      <div className="flex">
+        <Button
+          className="absolute top-0 right-0 m-4 z-50 bg-purple rounded-lg p-2 "
+          text="다읽었어요"
+          onClick={() => alert('다읽어어요')}
+        />
+      </div>
       <MainPageModal
         ref={modalRef}
         state={modalState}
