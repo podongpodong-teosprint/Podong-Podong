@@ -1,4 +1,5 @@
 import { TypeMemorySchema, useMemoryQuery } from 'apis/memory';
+import Progressbar from 'components/Progressbar';
 import Accordion from 'components/cores/design/Accordion';
 import Button from 'components/cores/design/Button';
 import Dropdown from 'components/cores/design/Dropdown';
@@ -36,6 +37,12 @@ export default function MainPage() {
   return (
     <div className="flex flex-col relative">
       <Podo memories={memories ?? []} />
+
+      <div>
+        16알 중 {memoizedMemories.length}알 모으는중!
+        <Progressbar value={memoizedMemories.length} maxValue={16} label={false}></Progressbar>
+      </div>
+
       <Dropdown
         onClick={(item) => setSortType(item.value as TypeSort)}
         items={[

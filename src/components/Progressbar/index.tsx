@@ -3,10 +3,12 @@ import { twMerge } from 'tailwind-merge';
 export default function Progressbar({
   value = 0,
   maxValue = 0,
+  label = true,
   className,
 }: {
   value?: number;
   maxValue?: number;
+  label?: boolean;
   className?: string;
 }) {
   return (
@@ -16,11 +18,13 @@ export default function Progressbar({
         value={value}
         max={maxValue}
       ></progress>
-      <p className="gap-1">
-        <span>{value}</span>
-        <span>/</span>
-        <span className="">{maxValue}</span>
-      </p>
+      {label && (
+        <p className="gap-1">
+          <span>{value}</span>
+          <span>/</span>
+          <span className="">{maxValue}</span>
+        </p>
+      )}
     </div>
   );
 }
