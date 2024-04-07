@@ -2,6 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import { TypeGrape, TypeGrapeShape } from '../components/podo/types';
 import { grapes, styleByType } from '../components/podo/consts';
 // import { TypeMemorySchema } from 'apis/memory';
+import Modal from '../components/library/Modal';
 
 export default function LibraryPage() {
   //   const memories: TypeMemorySchema[] = [
@@ -47,21 +48,25 @@ export function Podo() {
   };
 
   return (
-    <svg
-      onClick={handlePodoClick}
-      width="100"
-      height="200"
-      viewBox="0 0 303 426"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M39.7541 49.3339L102.221 85.5874C106.247 87.972 111.332 85.0364 111.279 80.3579L111.116 8.13284C111.065 3.54417 106.091 0.709459 102.117 3.00394L39.8122 38.9755C35.838 41.27 35.8059 46.995 39.7541 49.3339Z"
-        fill="#14AE5C"
-      />
-      {grapes.map((grape, i) => {
-        return <circle id={`${i}`} key={i} {...createGrape(grape, 0)} fill="purple" />;
-      })}
-    </svg>
+    <div className="flex flex-col">
+      <svg
+        onClick={handlePodoClick}
+        width="100"
+        height="200"
+        viewBox="0 0 303 426"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M39.7541 49.3339L102.221 85.5874C106.247 87.972 111.332 85.0364 111.279 80.3579L111.116 8.13284C111.065 3.54417 106.091 0.709459 102.117 3.00394L39.8122 38.9755C35.838 41.27 35.8059 46.995 39.7541 49.3339Z"
+          fill="#14AE5C"
+        />
+        {grapes.map((grape, i) => {
+          return <circle id={`${i}`} key={i} {...createGrape(grape, 0)} fill="purple" />;
+        })}
+      </svg>
+      <div>제목</div>
+      <Modal />
+    </div>
   );
 }

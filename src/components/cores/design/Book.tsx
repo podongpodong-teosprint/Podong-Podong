@@ -1,20 +1,20 @@
+import React from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
 import { GoStarFill } from 'react-icons/go';
 import { GoStar } from 'react-icons/go';
 
-type TypeBookProps = {
+interface TypeBookProps {
   title: string;
   author: string;
   publisher: string;
-  img: string;
-};
+}
 
-export default function Book({ title, author, publisher, img }: TypeBookProps) {
+export default function Book({ title, author, publisher }: TypeBookProps) {
   return (
     <div className="flex bg-gray p-5 rounded-lg justify-between items-center w-full">
       <div className="flex">
         <div className="mr-3">
-          <img src={img} alt="책 표지" width={50} height={50} />
+          <img src="https://image.yes24.com/momo/TopCate249/MidCate003/24823257.jpg" alt="" width={50} height={50} />
         </div>
         <div>
           <p>
