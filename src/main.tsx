@@ -16,7 +16,7 @@ import WrappingFrame from 'components/cores/design/WrappingFrame';
 import PodoDetailModal from 'components/library/PodoDetailModal';
 
 async function enableMocking() {
-  if (import.meta.env.DEV) {
+  if (true) {
     const { worker } = await import('./mocks/index');
     return worker.start();
   }
