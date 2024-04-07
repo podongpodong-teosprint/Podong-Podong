@@ -42,20 +42,24 @@ export default function LibraryPage() {
 }
 // TODO: 서재용 포도로 나중에 따로 컴포넌트 빼야
 export function Podo() {
-  const handlePodoClick = () => {
-    alert('circle clicked');
-  };
-
   const createGrape = (shape: TypeGrapeShape, type: TypeGrape) => {
     const baseClassName = 'cursor-pointer transition-all ';
     const style = styleByType[type];
     return { ...shape, ...style, className: twMerge(baseClassName) };
   };
 
+  const modalRef = useRef<HTMLDialogElement | null>(null);
+
+  const openModal = () => {
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
+  };
+
   return (
-    <div className="flex flex-col" onClick={handlePodoClick}>
+    <div className="flex flex-col">
       <svg
-        onClick={handlePodoClick}
+        onClick={openModal}
         width="100"
         height="200"
         viewBox="0 0 303 426"
@@ -70,7 +74,7 @@ export function Podo() {
           return <circle id={`${i}`} key={i} {...createGrape(grape, 0)} fill="purple" />;
         })}
       </svg>
-      <ConfirmModal />
+      <ConfirmModal modalRef={modalRef} />
     </div>
   );
 }
@@ -126,7 +130,7 @@ export function EmptyPodo() {
           return <circle id={`${i}`} key={i} {...createGrape(grape, 0)} fill="white" />;
         })}
       </svg>
-      <ConfirmModal />
+      {/* <ConfirmModal /> */}
       <dialog ref={modalRef} id="my_modal_1" className="p-3 modal">
         <div className="w-full modal-box bg-gray">
           <div className="flex items-center w-full px-3 py-1 bg-white border-2 border-dashed rounded-full border-gray">
