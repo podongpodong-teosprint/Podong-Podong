@@ -40,6 +40,6 @@ export const handlers = [
   }),
   http.get('/memory/:bookId', ({ params }) => {
     const { bookId } = params;
-    return HttpResponse.json(Array.from(memories));
+    return HttpResponse.json(Object.fromEntries(memories.entries()));
   }),
 ];

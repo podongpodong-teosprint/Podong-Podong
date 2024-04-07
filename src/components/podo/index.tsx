@@ -35,7 +35,7 @@ export default function Podo({ memories }: { memories: TypeMemorySchema[] }) {
         fill="#14AE5C"
       />
       {grapes.map((grape, i) => {
-        return <circle id={`${i}`} key={i} {...createGrape(grape, deepSearch(memories[i], 'density') ?? 0)} />;
+        return <circle id={`${i}`} key={i} {...createGrape(grape, deepSearch(memories[`${i}`], 'density') ?? 0)} />;
       })}
     </svg>
   );
