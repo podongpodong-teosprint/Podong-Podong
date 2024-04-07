@@ -17,7 +17,8 @@ export const searchBook = async (title) => {
             title: book.title,
             authors: book.authors,
             contents: book.contents,
-            publisher: book.publisher
+            publisher: book.publisher,
+            thumbnail: book.thumbnail
         }
     })
 }
