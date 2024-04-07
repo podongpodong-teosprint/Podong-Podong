@@ -12,3 +12,7 @@
 * {
   font-family: 'omyu_pretty';
 }
+
+body {
+  @apply bg-gray;
+}

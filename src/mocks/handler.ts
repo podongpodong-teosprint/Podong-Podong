@@ -26,7 +26,7 @@ const podoList = new Map<string, TypePodoShcema>([
     {
       podoId: '1',
       title: 'title1',
-      status: 'reading',
+      status: 'completed',
       description: 'description1',
       author: 'author1',
     },

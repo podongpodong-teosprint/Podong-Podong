@@ -14,6 +14,7 @@ import { IoMdWarning } from 'react-icons/io';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import MainPagePodoInfoModal from 'components/MainPagePodoInfoModal';
 import { Link, useNavigate } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 type TypeSort = 'latest' | 'density';
 type TypeCmpFunc = (a: TypeMemorySchema, b: TypeMemorySchema) => number;
@@ -138,15 +139,18 @@ export default function MainPage() {
   return (
     <div className="flex flex-col relative">
       {/* 참잘했어요 */}
-      {mainPodo &&
-        (mainPodo.status === 'completed' ? (
-          <img className="absolute right-2 top-2 w-[78px] h-[75px]" src={'/ic_you_did_good_job.png'}></img>
-        ) : (
-          <div className=" w-14 h-14 absolute flex flex-col items-center justify-center bg-purple rounded-full p-2 right-5 top-5">
-            <PiStampBold size={20} />
-            <div>완료</div>
-          </div>
-        ))}
+      {mainPodo && (
+        <div
+          onClick={() => alert('')}
+          className={twMerge(
+            'w-14 h-14 absolute flex flex-col items-center justify-center rounded-full p-2 right-5 top-5 cursor-pointer z-[100000]',
+            mainPodo.status === 'completed' ? 'bg-purple' : 'border-black border '
+          )}
+        >
+          <PiStampBold size={20} />
+          <div>완료</div>
+        </div>
+      )}
 
       <div className="flex w-full flex-col items-center relative border-2 border-dashed border-purple rounded">
         <h1
