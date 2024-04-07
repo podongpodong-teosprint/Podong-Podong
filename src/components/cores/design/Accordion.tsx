@@ -13,14 +13,14 @@ export default function Accordion({ text, number, date }: TypeAccordionProps) {
     setIsOpen(!isOpen);
   };
   return (
-    <div>
+    <div className="my-4">
       <details className={`collapse bg-base-200 ${isOpen ? 'open' : ''} ${text.length < 20 ? '' : 'collapse-arrow'}`}>
         <summary
           className={`collapse-title text-xl font-medium cursor-pointer ${text.length < 20 ? '' : 'collapse-arrow'}`}
           onClick={toggleCollapse}
         >
           <div className="flex items-center">
-            <div className="mr-3 bg-purple p-2 rounded-full w-10 text-center h-10">{number}</div>
+            <div className="w-10 h-10 p-2 mr-3 text-center rounded-full bg-purple">{number}</div>
             <div>
               <div>{date}</div>
               <div className="rounded-full">{text.slice(0, 20)}</div>

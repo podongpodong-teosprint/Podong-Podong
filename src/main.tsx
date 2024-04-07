@@ -13,6 +13,8 @@ import MainPage from 'pages/MainPage';
 import LibraryPage from 'pages/LibraryPage';
 import WrappingFrame from 'components/cores/design/WrappingFrame';
 
+import PodoDetailModal from 'components/library/PodoDetailModal';
+
 async function enableMocking() {
   if (import.meta.env.DEV) {
     const { worker } = await import('./mocks/index');
@@ -40,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: '/library',
     element: <LibraryPage />,
+  },
+  {
+    path: '/library/:id',
+    element: <PodoDetailModal />,
   },
 ]);
 
