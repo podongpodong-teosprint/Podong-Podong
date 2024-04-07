@@ -88,13 +88,13 @@ export const handlers = [
     podoList.set(podoList.size.toString(), { ...newPodo, podoId: podoList.size.toString() });
     return HttpResponse.json(newPodo, { status: 201 }); // newly created
   }),
-  http.get('/podo/:podoId', ({ params }) => {
-    const { podoId } = params;
-    return HttpResponse.json(podoList.get(podoId as string));
-  }),
   http.get('/podo/main', () => {
     const mainPodoData = podoList.get(mainPodo.podoId);
     return HttpResponse.json(mainPodoData);
+  }),
+  http.get('/podo/:podoId', ({ params }) => {
+    const { podoId } = params;
+    return HttpResponse.json(podoList.get(podoId as string));
   }),
   http.post('/podo/register', async ({ request }) => {
     const newMainPodo = (await request.json()) as TypePodoShcema;

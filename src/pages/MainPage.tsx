@@ -13,6 +13,7 @@ import { PiStampBold } from 'react-icons/pi';
 import { IoMdWarning } from 'react-icons/io';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import MainPagePodoInfoModal from 'components/MainPagePodoInfoModal';
+import { Link, useNavigate } from 'react-router-dom';
 
 type TypeSort = 'latest' | 'density';
 type TypeCmpFunc = (a: TypeMemorySchema, b: TypeMemorySchema) => number;
@@ -26,7 +27,8 @@ export default function MainPage() {
     density: 0,
     date: useToday(),
   };
-  const { data: mainPodo, refetch: mainPodoRefetch } = useMainPodoQuery();
+  const navigate = useNavigate();
+  const { data: mainPodo } = useMainPodoQuery();
   const [sortType, setSortType] = useState<TypeSort>('latest');
   const [confirmState, setConfirmState] = useState<TypeConfirmState>();
   const [modalState, setModalState] = useState<TypeModalState>(INITIAL_MODAL_STATE);
@@ -40,7 +42,6 @@ export default function MainPage() {
 
   const { mutate: uploadMemory } = useMemoryUploadMutation();
   const { mutate: deleteMemory } = useMemoryDeleteMutation();
-  const { mutate: registerMainPodo } = useMainRegisterMutation();
 
   const cmpFuncByType = useCallback((type: TypeSort): TypeCmpFunc => {
     return function (a: TypeMemorySchema, b: TypeMemorySchema) {
@@ -147,26 +148,22 @@ export default function MainPage() {
           </div>
         ))}
 
-      <button className="p-4 bg-purple" onClick={() => registerMainPodo('1')}>
-        1번 메인포도로 등록하기
-      </button>
-      <button onClick={() => mainPodoRefetch()}>메인포도 가져오기</button>
-
       <div className="flex w-full flex-col items-center relative border-2 border-dashed border-purple rounded">
-        {mainPodo && (
-          <h1
-            onClick={() => openPodoInfoModal()}
-            className="cursor-pointer hover:bg-gray rounded px-2 py-1 font-bold text-2xl self-start ml-2 mt-2"
-          >
-            제목 : {mainPodo?.title}
-          </h1>
-        )}
+        <h1
+          onClick={() => (mainPodo ? openPodoInfoModal() : navigate('/library'))}
+          className="cursor-pointer hover:bg-gray rounded px-2 py-1 font-bold text-2xl self-start ml-2 mt-2"
+        >
+          제목 : {mainPodo?.title ?? '포도를 등록해주세요!'}
+        </h1>
         {mainPodo && <Podo memories={memories ?? []} onClick={(memoryId) => openModal(memoryId)} />}
         {!mainPodo && (
           <>
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 bg-purple/90 w-[200px] h-[200px] rounded-full flex justify-center items-center hover:scale-95 active:scale-90 transition-all cursor-pointer">
+            <Link
+              to="/library"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 bg-purple/90 w-[200px] h-[200px] rounded-full flex justify-center items-center hover:scale-95 active:scale-90 transition-all cursor-pointer"
+            >
               새로운 포도를 등록하세요!
-            </div>
+            </Link>
             <Podo memories={emptyPodo} onClick={() => {}} />
           </>
         )}
