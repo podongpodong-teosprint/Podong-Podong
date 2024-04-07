@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { client } from 'apis';
 
 export type TypePodoShcema = {
-  podoId?: string;
+  podoId: string;
   title: string;
   status?: string;
   description?: string;
