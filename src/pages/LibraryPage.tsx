@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import { TypeGrape, TypeGrapeShape } from '../components/podo/types';
 import { grapes, styleByType } from '../components/podo/consts';
 // import { TypeMemorySchema } from 'apis/memory';
-import Modal from '../components/library/Modal';
+import ConfirmModal from '../components/library/ConfirmModal';
 
 export default function LibraryPage() {
   //   const memories: TypeMemorySchema[] = [
@@ -66,7 +66,7 @@ export function Podo() {
         })}
       </svg>
       <div>제목</div>
-      <Modal />
+      <ConfirmModal />
     </div>
   );
 }
