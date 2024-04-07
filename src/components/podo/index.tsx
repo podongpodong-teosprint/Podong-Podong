@@ -13,7 +13,7 @@ export default function Podo({ memories }: { memories: TypeMemorySchema[] }) {
   };
 
   const createGrape = (shape: TypeGrapeShape, type: TypeGrape) => {
-    const baseClassName = 'cursor-pointer transition-all ';
+    const baseClassName = 'cursor-pointer transition-all hover:rotate-1 active:-rotate-1';
     const normalTypeClassName = 'hover:opacity-90';
     const noneTypeClassName = 'hover:fill-[#645cbb]';
     const className = type === 0 ? noneTypeClassName : normalTypeClassName;
