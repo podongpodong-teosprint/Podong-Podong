@@ -24,7 +24,7 @@ export default function Rating({
   };
 
   useEffect(() => {
-    setRating(value);
+    setRating(value - 1);
   }, [value]);
 
   return (

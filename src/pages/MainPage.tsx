@@ -1,8 +1,8 @@
 import { TypeMemorySchema, useMemoryQuery } from 'apis/memory';
+import Accordion from 'components/MainPageAccordion';
 import MainPageModal from 'components/MainPageModal';
 import { TypeModalState } from 'components/MainPageModal/types';
 import Progressbar from 'components/Progressbar';
-import Accordion from 'components/cores/design/Accordion';
 import Button from 'components/cores/design/Button';
 import Dropdown from 'components/cores/design/Dropdown';
 import Loading from 'components/cores/design/Loading';
@@ -84,7 +84,7 @@ export default function MainPage() {
           { label: '농도순', value: 'density' },
         ]}
       />
-      <div>
+      <div className="flex flex-col gap-2">
         {isLoading && <Loading />}
         {isError && <div>Error..</div>}
         {isSuccess &&
@@ -94,6 +94,8 @@ export default function MainPage() {
               date={memory.date}
               number={Number(memory.memoryId)}
               text={memory.memory}
+              handleUpdate={() => openModal(memory.memoryId)}
+              handleDelete={() => alert('')}
             />
           ))}
       </div>
