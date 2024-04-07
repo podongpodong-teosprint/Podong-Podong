@@ -3,8 +3,9 @@ import { TypeGrape, TypeGrapeShape } from './types';
 import { grapes, styleByType } from './consts';
 import { TypeMemorySchema } from 'apis/memory';
 import { deepSearch } from 'utils.ts';
+import { memo } from 'react';
 
-export default function Podo({ memories }: { memories: TypeMemorySchema[] }) {
+const Podo = memo(function ({ memories }: { memories: TypeMemorySchema[] }) {
   const handlePodoClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     const target = e.target as SVGElement;
     if (target.nodeName === 'circle') {
@@ -39,4 +40,6 @@ export default function Podo({ memories }: { memories: TypeMemorySchema[] }) {
       })}
     </svg>
   );
-}
+});
+
+export default Podo;
