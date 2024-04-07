@@ -1,5 +1,13 @@
-import React from 'react';
+import { ComponentProps } from 'react';
 
-export default function Button({ text }) {
-  return <button className="bg-purple px-3 py-1 rounded-full hover:bg-purple-hover">{text}</button>;
+type TypeButtonProps = {
+  text: string;
+} & ComponentProps<'button'>;
+
+export default function Button({ text, ...props }: TypeButtonProps) {
+  return (
+    <button className="bg-purple px-3 py-1 rounded-full hover:bg-purple-hover" {...props}>
+      {text}
+    </button>
+  );
 }
