@@ -1,22 +1,25 @@
-import { useUploadMutation, useDeleteMutation, useSampleQuery } from 'apis/sample';
-import { useState } from 'react';
+import { TypePodoShcema, usePodoListQuery, usePodoUploadMutation } from 'apis/podo';
 
 export default function TestPage() {
-  const { data, refetch: refetchPost } = useSampleQuery();
-  const { mutate: uploadPost } = useUploadMutation();
-  const { mutate: deletePost } = useDeleteMutation();
+  const { data: podoList, refetch: getPodoList } = usePodoListQuery();
 
-  const [value, setValue] = useState('');
+  const { mutate } = usePodoUploadMutation();
+
+  const samplePodo: Omit<TypePodoShcema, 'status' | 'podoId'> = {
+    title: 'title',
+    description: 'description',
+    author: 'sample',
+  };
 
   return (
     <div>
-      <h1>data: {JSON.stringify(data)}</h1>
-      <div className="flex flex-col">
-        <input className="border bg-red-100" value={value} onChange={(e) => setValue(e.target.value)}></input>
-        <button onClick={() => uploadPost({ key: value })}>add</button>
-        <button onClick={() => refetchPost()}>refetch</button>
-        <button onClick={() => deletePost({ id: value })}>delete</button>
-      </div>
+      <p>{JSON.stringify(podoList)}</p>
+      <button onClick={() => getPodoList()} className="p-4 bg-purple">
+        shoot
+      </button>
+
+      <button onClick={() => mutate({ ...samplePodo, status: 'reading' })}>등록하기</button>
+      <button onClick={() => mutate({ ...samplePodo, status: 'wish' })}>찜하기</button>
     </div>
   );
 }
