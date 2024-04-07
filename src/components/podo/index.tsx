@@ -2,17 +2,25 @@ import { twMerge } from 'tailwind-merge';
 import { TypeGrape, TypeGrapeShape } from './types';
 import { grapes, styleByType } from './consts';
 import { TypeMemorySchema } from 'apis/memory';
+import { deepSearch } from 'utils.ts';
+import { memo } from 'react';
 
-export default function Podo({ memories }: { memories: TypeMemorySchema[] }) {
+const Podo = memo(function ({
+  memories,
+  onClick,
+}: {
+  memories: TypeMemorySchema[];
+  onClick: (memoryId: string) => void;
+}) {
   const handlePodoClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     const target = e.target as SVGElement;
     if (target.nodeName === 'circle') {
-      console.log('circle clicked', target.id);
+      onClick(target.id);
     }
   };
 
   const createGrape = (shape: TypeGrapeShape, type: TypeGrape) => {
-    const baseClassName = 'cursor-pointer transition-all ';
+    const baseClassName = 'cursor-pointer transition-all hover:rotate-1 active:-rotate-1';
     const normalTypeClassName = 'hover:opacity-90';
     const noneTypeClassName = 'hover:fill-[#645cbb]';
     const className = type === 0 ? noneTypeClassName : normalTypeClassName;
@@ -34,8 +42,10 @@ export default function Podo({ memories }: { memories: TypeMemorySchema[] }) {
         fill="#14AE5C"
       />
       {grapes.map((grape, i) => {
-        return <circle id={`${i}`} key={i} {...createGrape(grape, 0)} />;
+        return <circle id={`${i}`} key={i} {...createGrape(grape, deepSearch(memories[`${i}`], 'density') ?? 0)} />;
       })}
     </svg>
   );
-}
+});
+
+export default Podo;
