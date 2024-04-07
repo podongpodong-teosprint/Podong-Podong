@@ -5,11 +5,17 @@ import { TypeMemorySchema } from 'apis/memory';
 import { deepSearch } from 'utils.ts';
 import { memo } from 'react';
 
-const Podo = memo(function ({ memories }: { memories: TypeMemorySchema[] }) {
+const Podo = memo(function ({
+  memories,
+  onClick,
+}: {
+  memories: TypeMemorySchema[];
+  onClick: (memoryId: string) => void;
+}) {
   const handlePodoClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     const target = e.target as SVGElement;
     if (target.nodeName === 'circle') {
-      console.log('circle clicked', target.id);
+      onClick(target.id);
     }
   };
 

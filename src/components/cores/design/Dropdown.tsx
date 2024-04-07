@@ -27,8 +27,8 @@ export default function Dropdown({
     <details className={`dropdown-${dir} dropdown`}>
       <summary className="m-1 btn px-4 py-2 min-h-fit h-fit">{value.label}</summary>
       <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-        {items.map((item) => (
-          <li onClick={() => handleClick(item)}>
+        {items.map((item, i) => (
+          <li key={`dropdown-item-${i}`} onClick={() => handleClick(item)}>
             <a>{item.label}</a>
           </li>
         ))}
