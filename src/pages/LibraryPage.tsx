@@ -6,7 +6,7 @@ import { grapes, styleByType } from '../components/podo/consts';
 import ConfirmModal from '../components/library/ConfirmModal';
 import { FaSearch } from 'react-icons/fa';
 import Book from 'components/cores/design/Book';
-import { searchBook } from '../../api/bookAPI.js';
+import { searchBook } from 'apis/kakao';
 
 export default function LibraryPage() {
   const podoList: PodoList[] = [
