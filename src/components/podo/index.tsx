@@ -9,7 +9,7 @@ const Podo = memo(function ({
   memories,
   onClick,
 }: {
-  memories: TypeMemorySchema[];
+  memories: TypeMemorySchema[] | { density: number }[];
   onClick: (memoryId: string) => void;
 }) {
   const handlePodoClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {

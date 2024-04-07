@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 
 type TypeButtonProps = {
-  text: string;
+  text: React.ReactElement;
 } & ComponentProps<'button'>;
 
 export default function Button({ text, ...props }: TypeButtonProps) {

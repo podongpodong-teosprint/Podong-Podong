@@ -1,9 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { client } from 'apis';
-
-export type TypePodoShcema = {
-  podoId: string;
-};
+import { TypePodoShcema } from './podo';
 
 export const useMainPodoQuery = () => {
   return useQuery({
