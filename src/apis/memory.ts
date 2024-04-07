@@ -32,17 +32,6 @@ export const useMemoryUploadMutation = () => {
   });
 };
 
-export const useMemoryUpdateMutation = () => {
-  return useMutation({
-    mutationFn: function (memory: TypeMemorySchema) {
-      return client.put(`/memory/${memory.memoryId}`, memory);
-    },
-    onSuccess: function (_, memory) {
-      queryClient.invalidateQueries({ queryKey: ['memory', memory.bookId] });
-    },
-  });
-};
-
 export const useMemoryDeleteMutation = () => {
   return useMutation({
     mutationFn: function (params: Pick<TypeMemorySchema, 'memoryId' | 'bookId'>) {

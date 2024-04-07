@@ -16,10 +16,10 @@ export default function Accordion({ text, number, date, handleUpdate, handleDele
   };
   return (
     <div>
-      <details className={`collapse bg-base-200 ${isOpen ? 'open' : ''} ${text.length < 20 ? '' : 'collapse-arrow'}`}>
+      <details className={`collapse bg-base-200 ${isOpen ? 'open' : ''} `}>
         <summary
           {...props}
-          className={`collapse-title px-4 text-xl font-medium cursor-pointer ${text.length < 20 ? '' : 'collapse-arrow'}`}
+          className={`collapse-title min-h-fit py-2 px-4 text-xl font-medium cursor-pointer `}
           onClick={handleClick}
         >
           <div className="flex items-center justify-between">
@@ -51,7 +51,7 @@ export default function Accordion({ text, number, date, handleUpdate, handleDele
           </div>
         </summary>
         <div className="collapse-content">
-          <p>{text}</p>
+          <p className="w-full break-words">{text}</p>
         </div>
       </details>
     </div>

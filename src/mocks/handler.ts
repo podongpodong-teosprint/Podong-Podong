@@ -47,4 +47,9 @@ export const handlers = [
     memories.set(newPost.memoryId, newPost);
     return HttpResponse.json(newPost, { status: 201 }); // newly created
   }),
+  http.delete('/memory/:memoryId', async ({ params }) => {
+    const { memoryId } = params;
+    memories.delete(memoryId as string);
+    return HttpResponse.json({ status: 202 });
+  }),
 ];

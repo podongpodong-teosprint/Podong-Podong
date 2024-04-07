@@ -11,7 +11,8 @@ interface TypeModalProps {
 
 const MainPageModal = forwardRef(function ({ state, handleChange, handleSave, handleCancel }: TypeModalProps, ref) {
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (state.memory.length < 200) {
+    const len = e.target.value.length;
+    if (len <= 200) {
       handleChange('memory')(e.target.value);
     }
   };

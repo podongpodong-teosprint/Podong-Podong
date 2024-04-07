@@ -1,5 +1,6 @@
-import { TypeMemorySchema, useMemoryQuery, useMemoryUploadMutation } from 'apis/memory';
+import { TypeMemorySchema, useMemoryDeleteMutation, useMemoryQuery, useMemoryUploadMutation } from 'apis/memory';
 import Accordion from 'components/MainPageAccordion';
+import MainPageConfirm, { TypeConfirmState } from 'components/MainPageConfirm';
 import MainPageModal from 'components/MainPageModal';
 import { TypeModalState } from 'components/MainPageModal/types';
 import Progressbar from 'components/Progressbar';
@@ -21,10 +22,12 @@ export default function MainPage() {
     date: useToday(),
   };
   const [sortType, setSortType] = useState<TypeSort>('latest');
+  const [confirmState, setConfirmState] = useState<TypeConfirmState>();
   const [modalState, setModalState] = useState<TypeModalState>(INITIAL_MODAL_STATE);
   const { data: memories, isError, isLoading, isSuccess, refetch } = useMemoryQuery('1');
 
   const { mutate: uploadMemory } = useMemoryUploadMutation();
+  const { mutate: deleteMemory } = useMemoryDeleteMutation();
 
   const cmpFuncByType = useCallback((type: TypeSort): TypeCmpFunc => {
     return function (a: TypeMemorySchema, b: TypeMemorySchema) {
@@ -47,6 +50,7 @@ export default function MainPage() {
   }, [cmpFuncByType, memoizedMemories, sortType]);
 
   const modalRef = useRef<{ showModal: () => void; close: () => void }>(null);
+  const confirmRef = useRef<{ showModal: () => void; close: () => void }>(null);
 
   const closeModal = () => {
     if (modalRef && modalRef.current) {
@@ -70,6 +74,29 @@ export default function MainPage() {
     );
   };
 
+  const closeConfirm = () => {
+    if (confirmRef && confirmRef.current) {
+      confirmRef.current.close();
+    }
+  };
+
+  const handleConfirm = (memoryId: string) => {
+    deleteMemory(
+      { memoryId, bookId: '1' },
+      {
+        onSuccess: () => {
+          refetch();
+          closeConfirm();
+        },
+      }
+    );
+  };
+
+  const handleDelete = (memoryId: string) => {
+    confirmRef.current?.showModal();
+    setConfirmState((prev) => ({ ...prev, memoryId }));
+  };
+
   const openModal = (memoryId: string) => {
     const foundMemory = memoizedMemories.find((memory) => memory.memoryId === memoryId);
     const memory = foundMemory
@@ -83,6 +110,8 @@ export default function MainPage() {
 
   return (
     <div className="flex flex-col relative">
+      <img className="absolute right-10 top-10 w-[110px] h-[100px]" src={'/ic_you_did_good_job.png'}></img>
+
       <Podo memories={memories ?? []} onClick={(memoryId) => openModal(memoryId)} />
 
       <div>
@@ -108,7 +137,7 @@ export default function MainPage() {
               number={Number(memory.memoryId)}
               text={memory.memory}
               handleUpdate={() => openModal(memory.memoryId)}
-              handleDelete={() => alert('')}
+              handleDelete={() => handleDelete(memory.memoryId)}
             />
           ))}
       </div>
@@ -120,6 +149,7 @@ export default function MainPage() {
         handleSave={handleSave}
         handleCancel={closeModal}
       />
+      <MainPageConfirm ref={confirmRef} state={confirmState} handleConfirm={handleConfirm} handleCancel={() => {}} />
     </div>
   );
 }
