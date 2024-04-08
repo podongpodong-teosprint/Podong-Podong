@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { TypeGrape, TypeGrapeShape } from '../podo/types';
-import { grapes, styleByType } from '../podo/consts';
 import { twMerge } from 'tailwind-merge';
 import ConfirmModal from './ConfirmModal';
+import { styleByType, grapes } from './consts';
 
 export default function Podo({ param }: { param: string }) {
   const createGrape = (shape: TypeGrapeShape, type: TypeGrape) => {
@@ -20,7 +20,7 @@ export default function Podo({ param }: { param: string }) {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col hover:scale-105 transition-all">
       <svg
         onClick={openModal}
         width="100"
@@ -34,7 +34,7 @@ export default function Podo({ param }: { param: string }) {
           fill="#14AE5C"
         />
         {grapes.map((grape, i) => {
-          return <circle id={`${i}`} key={i} {...createGrape(grape, 0)} fill="purple" />;
+          return <circle id={`${i}`} key={i} {...createGrape(grape, (i % 3) + 1)} />;
         })}
       </svg>
       <ConfirmModal modalRef={modalRef} param={param} />

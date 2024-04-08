@@ -1,7 +1,7 @@
 import { IoIosAddCircle } from 'react-icons/io';
 
 import { GoStar } from 'react-icons/go';
-import { usePodoUploadMutation } from 'apis/podo';
+import { usePodoListQuery, usePodoUploadMutation } from 'apis/podo';
 import { TypeBookSchema } from 'apis/book';
 import { TypePodoShcema } from 'apis/podo';
 
@@ -14,6 +14,7 @@ export default function Book({
 }: TypeBookSchema & { closeModal: () => void }) {
   // const navigate = useNavigate();
 
+  const { refetch: refetchPodoList } = usePodoListQuery();
   const { mutate: uploadPodo } = usePodoUploadMutation();
 
   //FIXME: post 요청은 성공, 그러나 제대로 반영되지 않음...
@@ -23,8 +24,8 @@ export default function Book({
       {
         onError: () => console.log('error'),
         onSuccess: () => {
-          uploadPodo({ title });
           alert('등록되었습니다.');
+          refetchPodoList();
           closeModal();
         },
       }
