@@ -1,13 +1,32 @@
 import { useMemo } from 'react';
 import Podo from 'components/library/Podo';
 import EmptyPodo from 'components/library/EmptyPodo';
-import { TypePodoShcema, usePodoListQuery } from 'apis/podo';
+import { TypePodoShcema } from 'apis/podo';
+import { usePodoListQuery } from 'apis/podo';
 
 export default function LibraryPage() {
   const { data: podoList, isSuccess } = usePodoListQuery();
   const podoListData = useMemo(() => {
     return !isSuccess ? [] : Object.values(podoList);
   }, [isSuccess, podoList]);
+
+  // const podoListData = () => {
+  //   if (!isSuccess) return [];
+  //   return Object.values(podoList);
+  // };
+
+  // let podoListData: TypePodoShcema[];
+
+  // useEffect(() => {
+  //   console.log(podoList);
+  // }, [podoList]);
+
+  // if (!isSuccess) {
+  //   podoListData = [];
+  // } else {
+  //   podoListData = Object.values(podoList);
+  // }
+  // console.log(podoListData);
 
   return (
     <>
@@ -23,7 +42,7 @@ export default function LibraryPage() {
       <div className="grid self-start grid-cols-3 place-items-center">
         {podoListData?.map((podo: TypePodoShcema) => {
           return (
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center" key={podo.podoId}>
               <Podo param={podo.podoId} />
               <p>{podo.title}</p>
             </div>
