@@ -89,6 +89,8 @@ export default function EmptyPodo() {
                       authors={book.authors}
                       publisher={book.publisher}
                       thumbnail={book.thumbnail}
+                      description={book.contents ?? '-'}
+                      isbn={book.ISBN ?? '-'}
                       closeModal={() => closeModal()}
                     />
                   ))}

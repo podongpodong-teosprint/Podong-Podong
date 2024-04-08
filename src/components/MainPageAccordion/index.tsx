@@ -27,7 +27,7 @@ export default function Accordion({ text, number, date, handleUpdate, handleDele
               <div className="mr-3 bg-purple p-2 rounded-full w-10 text-center h-10">{number}</div>
               <div>
                 <div>{date}</div>
-                <div className="rounded-full">{text.slice(0, 20)}</div>
+                <div className="rounded-full">{text.slice(0, 13).concat(text.length >= 13 ? '..' : '')}</div>
               </div>
             </div>
             <div className="flex gap-2 ">

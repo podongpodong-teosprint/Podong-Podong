@@ -31,19 +31,14 @@ export default function LibraryPage() {
     <>
       <div className="">
         <h2 className="text-title">포동포동의 서재</h2>
-        <ul className="flex space-x-5">
-          <li>전체</li>
-          <li>읽은 책</li>
-          <li>읽고 있는 책</li>
-          <li>읽고 싶은 책</li>
-        </ul>
+        <ul className="flex space-x-5">{['전체', '읽은 책', '읽고 있는 책', '읽고 싶은 책'].join('   |   ')}</ul>
       </div>
       <div className="grid self-start grid-cols-3 place-items-center">
         {podoListData?.map((podo: TypePodoShcema) => {
           return (
             <div className="flex flex-col items-center" key={podo.podoId}>
               <Podo param={podo.podoId} />
-              <p>{podo.title}</p>
+              <p className="text-center">{podo.title.slice(0, 8).concat(podo.title.length >= 8 ? '..' : '')}</p>
             </div>
           );
         })}

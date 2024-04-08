@@ -93,7 +93,7 @@ export default function MainPage() {
   };
   const handleSave = () => {
     uploadMemory(
-      { ...modalState, bookId: '1' },
+      { ...modalState, bookId: mainPodo?.podoId ?? '1' },
       {
         onSuccess: () => {
           refetch();
@@ -111,7 +111,7 @@ export default function MainPage() {
 
   const handleConfirm = (memoryId: string) => {
     deleteMemory(
-      { memoryId, bookId: '1' },
+      { memoryId, bookId: mainPodo?.podoId ?? '1' },
       {
         onSuccess: () => {
           refetch();

@@ -11,16 +11,17 @@ export default function Book({
   publisher,
   thumbnail,
   closeModal,
+  description,
+  year,
 }: TypeBookSchema & { closeModal: () => void }) {
   // const navigate = useNavigate();
 
   const { refetch: refetchPodoList } = usePodoListQuery();
   const { mutate: uploadPodo } = usePodoUploadMutation();
 
-  //FIXME: post 요청은 성공, 그러나 제대로 반영되지 않음...
-  const handleUploadPodo = ({ title }: Omit<TypePodoShcema, 'podoId'>) => {
+  const handleUploadPodo = ({ ...podoSchema }: Omit<TypePodoShcema, 'podoId'>) => {
     uploadPodo(
-      { title },
+      { ...podoSchema },
       {
         onError: () => console.log('error'),
         onSuccess: () => {
@@ -52,7 +53,20 @@ export default function Book({
       </div>
       <div className="flex flex-col gap-0.5">
         <button>
-          <IoIosAddCircle size={24} onClick={() => handleUploadPodo({ title })} />
+          <IoIosAddCircle
+            size={24}
+            onClick={() =>
+              handleUploadPodo({
+                title,
+                author: authors[0],
+                publisher,
+                link: thumbnail,
+                status: 'reading',
+                description,
+                year,
+              })
+            }
+          />
         </button>
         <button>
           <GoStar size={24} />
