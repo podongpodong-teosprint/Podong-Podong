@@ -23,7 +23,7 @@ export default function Accordion({ text, number, date, handleUpdate, handleDele
           onClick={handleClick}
         >
           <div className="flex items-center justify-between">
-            <div className="flex flex-shrink-0">
+            <div className="flex flex-shrink-0 items-center">
               <div className="mr-3 bg-purple p-2 rounded-full w-10 text-center h-10">{number}</div>
               <div>
                 <div>{date}</div>

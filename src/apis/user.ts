@@ -1,9 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { client } from 'apis';
-
-export type TypePodoShcema = {
-  podoId: string;
-};
+import { TypePodoShcema } from './podo';
 
 export const useMainPodoQuery = () => {
   return useQuery({
@@ -19,6 +16,14 @@ export const useMainRegisterMutation = () => {
   return useMutation({
     mutationFn: function (podoId: string) {
       return client.post(`/podo/register`, { podoId });
+    },
+  });
+};
+
+export const usePodoStatusToCompletedMutation = () => {
+  return useMutation({
+    mutationFn: function () {
+      return client.post(`/podo/completed`);
     },
   });
 };

@@ -11,13 +11,14 @@ export type TypeMemorySchema = {
   density: number;
 };
 
-export const useMemoryQuery = (bookId: string) => {
+export const useMemoryQuery = (bookId: string, trigger: boolean) => {
   return useQuery({
     queryKey: ['memory', bookId],
     queryFn: async () => {
       const response = await client.get<TypeMemorySchema[]>(`/memory/${bookId}`);
       return response.data;
     },
+    enabled: trigger,
   });
 };
 

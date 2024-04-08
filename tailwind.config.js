@@ -20,5 +20,18 @@ export default {
       'green-hover': '#6FCB73',
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [
+    require('daisyui'),
+    function ({ addUtilities }) {
+      addUtilities({
+        '.no-scrollbar::--webkit-scrollbar': {
+          display: 'none',
+        },
+        '.no-scrollbar': {
+          '-ms-overflow-style': 'none',
+          'scrollbar-width': 'none',
+        },
+      });
+    },
+  ],
 };

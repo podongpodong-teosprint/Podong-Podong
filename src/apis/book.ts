@@ -2,14 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import { client } from 'apis';
 
 export type TypeBookSchema = {
-  bookId: number;
+  bookId?: number;
   title: string;
-  description: string;
-  author: string;
+  thumbnail: string;
+  description?: string;
+  authors: string[];
   link?: string;
   translator?: string;
   publisher?: string;
-  ISBN?: string;
+  isbn?: string;
   pages?: number;
   year?: string;
 };

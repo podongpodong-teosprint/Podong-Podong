@@ -1,18 +1,39 @@
-import React from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
-import { GoStarFill } from 'react-icons/go';
+
 import { GoStar } from 'react-icons/go';
+import { usePodoListQuery, usePodoUploadMutation } from 'apis/podo';
+import { TypeBookSchema } from 'apis/book';
+import { TypePodoShcema } from 'apis/podo';
 
-interface TypeBookProps {
-  title: string;
-  authors: string[];
-  publisher: string;
-  thumbnail: string;
-}
+export default function Book({
+  title,
+  authors,
+  publisher,
+  thumbnail,
+  closeModal,
+}: TypeBookSchema & { closeModal: () => void }) {
+  // const navigate = useNavigate();
 
-export default function Book({ title, authors, publisher, thumbnail }: TypeBookProps) {
+  const { refetch: refetchPodoList } = usePodoListQuery();
+  const { mutate: uploadPodo } = usePodoUploadMutation();
+
+  //FIXME: post 요청은 성공, 그러나 제대로 반영되지 않음...
+  const handleUploadPodo = ({ title }: Omit<TypePodoShcema, 'podoId'>) => {
+    uploadPodo(
+      { title },
+      {
+        onError: () => console.log('error'),
+        onSuccess: () => {
+          alert('등록되었습니다.');
+          refetchPodoList();
+          closeModal();
+        },
+      }
+    );
+  };
+
   return (
-    <div className="flex bg-white p-5 my-3 rounded-lg justify-between items-center w-full">
+    <div className="flex items-center justify-between w-full p-5 my-3 bg-white rounded-lg">
       <div className="flex">
         <div className="mr-3">
           <img src={thumbnail} alt={title} width={50} />
@@ -22,7 +43,7 @@ export default function Book({ title, authors, publisher, thumbnail }: TypeBookP
             제목: <span>{title}</span>
           </p>
           <p>
-            저자: <span>{authors.join(", ")}</span>
+            저자: <span>{authors.join(', ')}</span>
           </p>
           <p>
             출판사: <span>{publisher}</span>
@@ -31,7 +52,7 @@ export default function Book({ title, authors, publisher, thumbnail }: TypeBookP
       </div>
       <div className="flex flex-col gap-0.5">
         <button>
-          <IoIosAddCircle size={24} />
+          <IoIosAddCircle size={24} onClick={() => handleUploadPodo({ title })} />
         </button>
         <button>
           <GoStar size={24} />

@@ -14,6 +14,7 @@ import LibraryPage from 'pages/LibraryPage';
 import WrappingFrame from 'components/cores/design/WrappingFrame';
 
 import PodoDetailModal from 'components/library/PodoDetailModal';
+import Layout from 'pages/Layout';
 
 async function enableMocking() {
   if (true) {
@@ -25,27 +26,33 @@ async function enableMocking() {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
-  },
-  {
-    path: '/test',
-    element: <TestPage />,
-  },
-  {
-    path: '/componenttest',
-    element: <ComponentTest />,
-  },
-  {
-    path: '/main',
-    element: <MainPage />,
-  },
-  {
-    path: '/library',
-    element: <LibraryPage />,
-  },
-  {
-    path: '/library/:id',
-    element: <PodoDetailModal />,
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <App />,
+      },
+      {
+        path: '/test',
+        element: <TestPage />,
+      },
+      {
+        path: '/componenttest',
+        element: <ComponentTest />,
+      },
+      {
+        path: '/main',
+        element: <MainPage />,
+      },
+      {
+        path: '/library',
+        element: <LibraryPage />,
+      },
+      {
+        path: '/library/:id',
+        element: <PodoDetailModal />,
+      },
+    ],
   },
 ]);
 

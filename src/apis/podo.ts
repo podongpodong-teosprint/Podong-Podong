@@ -4,9 +4,9 @@ import { client } from 'apis';
 export type TypePodoShcema = {
   podoId: string;
   title: string;
-  status: string;
-  description: string;
-  author: string;
+  status?: string;
+  description?: string;
+  author?: string;
   link?: string;
   translator?: string;
   publisher?: string;

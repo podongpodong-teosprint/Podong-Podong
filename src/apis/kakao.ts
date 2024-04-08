@@ -20,6 +20,7 @@ export const searchBook = async (title: string) => {
       contents: book.contents,
       publisher: book.publisher,
       thumbnail: book.thumbnail,
+      ISBN: book.isbn,
     };
   });
 };
