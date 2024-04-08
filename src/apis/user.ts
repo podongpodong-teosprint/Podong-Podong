@@ -19,3 +19,11 @@ export const useMainRegisterMutation = () => {
     },
   });
 };
+
+export const usePodoStatusToCompletedMutation = () => {
+  return useMutation({
+    mutationFn: function () {
+      return client.post(`/podo/completed`);
+    },
+  });
+};

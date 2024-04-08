@@ -26,7 +26,7 @@ const podoList = new Map<string, TypePodoShcema>([
     {
       podoId: '1',
       title: 'title1',
-      status: 'completed',
+      status: 'reading',
       description: 'description1',
       author: 'author1',
     },
@@ -91,6 +91,11 @@ export const handlers = [
   http.get('/podo/main', () => {
     const mainPodoData = podoList.get(mainPodo.podoId);
     return HttpResponse.json(mainPodoData);
+  }),
+  http.post('/podo/completed', async ({ request }) => {
+    const podo = podoList.get(mainPodo.podoId);
+    podoList.set(mainPodo.podoId, { ...podo, status: 'completed' });
+    return HttpResponse.json({ status: 204 });
   }),
   http.get('/podo/:podoId', ({ params }) => {
     const { podoId } = params;

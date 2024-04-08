@@ -1,5 +1,5 @@
 import { TypeMemorySchema, useMemoryDeleteMutation, useMemoryQuery, useMemoryUploadMutation } from 'apis/memory';
-import { useMainPodoQuery, useMainRegisterMutation } from 'apis/user';
+import { useMainPodoQuery, useMainRegisterMutation, usePodoStatusToCompletedMutation } from 'apis/user';
 import Accordion from 'components/MainPageAccordion';
 import MainPageConfirm, { TypeConfirmState } from 'components/MainPageConfirm';
 import MainPageModal from 'components/MainPageModal';
@@ -15,6 +15,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import MainPagePodoInfoModal from 'components/MainPagePodoInfoModal';
 import { Link, useNavigate } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
+import { FaHome } from 'react-icons/fa';
 
 type TypeSort = 'latest' | 'density';
 type TypeCmpFunc = (a: TypeMemorySchema, b: TypeMemorySchema) => number;
@@ -29,7 +30,7 @@ export default function MainPage() {
     date: useToday(),
   };
   const navigate = useNavigate();
-  const { data: mainPodo } = useMainPodoQuery();
+  const { data: mainPodo, refetch: refetchMainPodo } = useMainPodoQuery();
   const [sortType, setSortType] = useState<TypeSort>('latest');
   const [confirmState, setConfirmState] = useState<TypeConfirmState>();
   const [modalState, setModalState] = useState<TypeModalState>(INITIAL_MODAL_STATE);
@@ -136,23 +137,35 @@ export default function MainPage() {
     }
   };
 
+  const { mutate: makeCompleted } = usePodoStatusToCompletedMutation();
+
   return (
     <div className="flex flex-col relative">
-      {/* 참잘했어요 */}
-      {mainPodo && (
-        <div
-          onClick={() => alert('')}
-          className={twMerge(
-            'w-14 h-14 absolute flex flex-col items-center justify-center rounded-full p-2 right-5 top-5 cursor-pointer z-[100000]',
-            mainPodo.status === 'completed' ? 'bg-purple' : 'border-black border '
-          )}
-        >
-          <PiStampBold size={20} />
-          <div>완료</div>
-        </div>
-      )}
-
-      <div className="flex w-full flex-col items-center relative border-2 border-dashed border-purple rounded">
+      <div className="w-full flex justify-end">
+        <button onClick={() => navigate('/library')} className="btn btn-ghost p-2 h-auto  min-h-fit">
+          <FaHome size={24} />
+        </button>
+      </div>
+      <div className="flex w-full flex-col items-center relative border-2 border-dashed border-purple rounded mt-1">
+        {/* 참잘했어요 */}
+        {mainPodo && (
+          <div
+            onClick={() =>
+              makeCompleted(void 0, {
+                onSuccess: () => {
+                  refetchMainPodo();
+                },
+              })
+            }
+            className={twMerge(
+              'w-14 h-14 absolute flex flex-col items-center justify-center rounded-full p-2 right-5 top-5 cursor-pointer z-[100000]  transition-all',
+              mainPodo.status === 'completed' ? 'bg-purple' : 'border-black border hover:bg-purple/50'
+            )}
+          >
+            <PiStampBold size={20} />
+            <p>완료</p>
+          </div>
+        )}
         <h1
           onClick={() => (mainPodo ? openPodoInfoModal() : navigate('/library'))}
           className="cursor-pointer hover:bg-gray rounded px-2 py-1 font-bold text-2xl self-start ml-2 mt-2"
