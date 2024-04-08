@@ -4,6 +4,8 @@ import { FaSearch } from 'react-icons/fa';
 import { grapes, styleByType } from '../podo/consts';
 import { TypeGrape, TypeGrapeShape } from '../podo/types';
 import { twMerge } from 'tailwind-merge';
+import Book from 'components/cores/design/Book';
+import { TypeBookSchema } from 'apis/book';
 
 export default function EmptyPodo() {
   const modalRef = useRef<HTMLDialogElement | null>(null);
@@ -25,6 +27,12 @@ export default function EmptyPodo() {
     setApiBooks([]);
     if (modalRef.current) {
       modalRef.current.showModal();
+    }
+  };
+
+  const closeModal = () => {
+    if (modalRef.current) {
+      modalRef.current.close();
     }
   };
 
@@ -74,14 +82,16 @@ export default function EmptyPodo() {
             <div>
               {apiBooks.length ? (
                 <div className="my-3 overflow-y-auto h-80">
-                  {/* {apiBooks.map((book) => (
-                      <Book
-                        title={book.title}
-                        authors={book.authors}
-                        publisher={book.publisher}
-                        thumbnail={book.thumbnail}
-                      />
-                    ))} */}
+                  {apiBooks.map((book: TypeBookSchema) => (
+                    <Book
+                      key={book.isbn}
+                      title={book.title}
+                      authors={book.authors}
+                      publisher={book.publisher}
+                      thumbnail={book.thumbnail}
+                      closeModal={() => closeModal()}
+                    />
+                  ))}
                 </div>
               ) : (
                 <p className="text-center my-3 text-[20px]">책이 없습니다.</p>

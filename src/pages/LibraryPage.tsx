@@ -9,6 +9,24 @@ export default function LibraryPage() {
     return !isSuccess ? [] : Object.values(podoList);
   }, [isSuccess, podoList]);
 
+  // const podoListData = () => {
+  //   if (!isSuccess) return [];
+  //   return Object.values(podoList);
+  // };
+
+  // let podoListData: TypePodoShcema[];
+
+  // useEffect(() => {
+  //   console.log(podoList);
+  // }, [podoList]);
+
+  // if (!isSuccess) {
+  //   podoListData = [];
+  // } else {
+  //   podoListData = Object.values(podoList);
+  // }
+  // console.log(podoListData);
+
   return (
     <>
       <div className="">
@@ -23,7 +41,7 @@ export default function LibraryPage() {
       <div className="grid self-start grid-cols-3 place-items-center">
         {podoListData?.map((podo: TypePodoShcema) => {
           return (
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center" key={podo.podoId}>
               <Podo param={podo.podoId} />
               <p>{podo.title}</p>
             </div>
