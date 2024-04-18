@@ -3,6 +3,7 @@
 > 이 프로젝트는 '테오의 스프린트'를 참여, 구글 스프린트 진행 방식을 직접 배워보며 만든 사이드 프로젝트입니다.
 
 <a href="podong-podong.vercel.app">
+  <img src="https://kdomo.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Feceee4ad-a34e-4e18-a14c-b919a1a3c9ad%2Fe6e416fa-f40c-4142-b73e-384efb17bd33%2F%25E1%2584%258C%25E1%2585%25A6%25E1%2584%2586%25E1%2585%25A9%25E1%2586%25A8%25E1%2584%258B%25E1%2585%25B3%25E1%2586%25AF-%25E1%2584%258B%25E1%2585%25B5%25E1%2586%25B8%25E1%2584%2585%25E1%2585%25A7%25E1%2586%25A8%25E1%2584%2592%25E1%2585%25A2%25E1%2584%258C%25E1%2585%25AE%25E1%2584%2589%25E1%2585%25A6%25E1%2584%258B%25E1%2585%25AD_-001.png?table=block&id=69190772-3238-4b19-958d-d670da1af13d&spaceId=eceee4ad-a34e-4e18-a14c-b919a1a3c9ad&width=1370&userId=&cache=v2" />
 </a>
 
 [테오의 스프린트 17기 8조: 포동포동]
@@ -25,7 +26,26 @@
 <!-- TOC -->
 
 ## 포동포동 시연
-(준비중! Coming soon...)
+
+1. 포도 등록
+   
+   <img width="300" src="https://kdomo.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Feceee4ad-a34e-4e18-a14c-b919a1a3c9ad%2Fd8edab8e-d372-47d6-9f78-6280b6ec4a3b%2FUntitled.png?table=block&id=06c45114-ffb3-4546-85ad-da5e32851e63&spaceId=eceee4ad-a34e-4e18-a14c-b919a1a3c9ad&width=480&userId=&cache=v2"/>
+
+
+2. 메인 포도 등록
+
+   <img width="300" src="https://kdomo.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Feceee4ad-a34e-4e18-a14c-b919a1a3c9ad%2F81084195-5baf-491e-8623-322ec8d037fa%2FUntitled.png?table=block&id=371c5eb3-cb54-488d-a605-bc25956ff8ca&spaceId=eceee4ad-a34e-4e18-a14c-b919a1a3c9ad&width=480&userId=&cache=v2" />
+
+
+3. 포도알 관리 및 포도알 감상평 확인
+
+   <img width="300" src="https://kdomo.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Feceee4ad-a34e-4e18-a14c-b919a1a3c9ad%2F937e909f-9bcd-4c9d-b70f-25e7fa9e70bd%2FUntitled.png?table=block&id=746f2e91-4ca5-4792-a024-1d231d695751&spaceId=eceee4ad-a34e-4e18-a14c-b919a1a3c9ad&width=480&userId=&cache=v2" />
+
+
+4. 포도농장 방문
+
+   <img width="300" src="https://kdomo.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Feceee4ad-a34e-4e18-a14c-b919a1a3c9ad%2F4359a511-4eaa-49ec-bf6d-059905267a42%2FUntitled.png?table=block&id=b65ae1b5-9a1c-4110-bfac-b33ae251305d&spaceId=eceee4ad-a34e-4e18-a14c-b919a1a3c9ad&width=480&userId=&cache=v2" />
+
 <br />
 <br />
 
