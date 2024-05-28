@@ -2,7 +2,7 @@
 > 포동포동은 책을 읽고 감상평을 작성해 포도알을 채울 수 있는 독서 장려 애플리케이션입니다.
 > 이 프로젝트는 '테오의 스프린트'를 참여, 구글 스프린트 진행 방식을 직접 배워보며 만든 사이드 프로젝트입니다.
 
-<a href="podong-podong.vercel.app">
+<a href="https://podong-podong.vercel.app/">
   <img src="https://kdomo.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Feceee4ad-a34e-4e18-a14c-b919a1a3c9ad%2Fe6e416fa-f40c-4142-b73e-384efb17bd33%2F%25E1%2584%258C%25E1%2585%25A6%25E1%2584%2586%25E1%2585%25A9%25E1%2586%25A8%25E1%2584%258B%25E1%2585%25B3%25E1%2586%25AF-%25E1%2584%258B%25E1%2585%25B5%25E1%2586%25B8%25E1%2584%2585%25E1%2585%25A7%25E1%2586%25A8%25E1%2584%2592%25E1%2585%25A2%25E1%2584%258C%25E1%2585%25AE%25E1%2584%2589%25E1%2585%25A6%25E1%2584%258B%25E1%2585%25AD_-001.png?table=block&id=69190772-3238-4b19-958d-d670da1af13d&spaceId=eceee4ad-a34e-4e18-a14c-b919a1a3c9ad&width=1370&userId=&cache=v2" />
 </a>
 
@@ -66,7 +66,7 @@
 <br />
 
 ## 포동포동 정보
-* [배포 링크](podong-podong.vercel.app)
+* [배포 링크](https://podong-podong.vercel.app/)
   
 * 프로젝트 기간
   * [24.04.03] 1일차 : 아이디어 도출 및 팀 선정
